@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace aoc20242;
+namespace aoc202421;
 
 class Solution
 {

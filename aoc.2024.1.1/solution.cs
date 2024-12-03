@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace aoc20241;
+namespace aoc202411;
 
 class Solution
 {

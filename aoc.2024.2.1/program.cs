@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace aoc20242;
+namespace aoc202421;
 
 class Program
 {
