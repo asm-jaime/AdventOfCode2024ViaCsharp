@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace aoc202432;
+namespace aoc202442;
 
 
 [TestFixture]

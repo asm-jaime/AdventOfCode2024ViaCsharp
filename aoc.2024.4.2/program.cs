@@ -1,23 +1,25 @@
 using System;
 using System.Collections.Generic;
 
-namespace aoc202432;
+namespace aoc202442;
 
 class Program
 {
     static void Main(string[] args)
     {
         var line = Console.ReadLine();
-        var numbers = new List<int>();
+
+        var numbers = new List<char[]>();
 
         var solution = new Solution();
 
-        long result = 0;
         while(line is not null)
         {
-            result += solution.GetSumOfAllMuls(line);
+            numbers.Add(line.ToCharArray());
             line = Console.ReadLine();
         }
+
+        var result = solution.CountCrossMAS(numbers.ToArray());
 
         Console.WriteLine(result);
     }

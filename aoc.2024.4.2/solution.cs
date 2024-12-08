@@ -1,44 +1,42 @@
-using System.Linq;
-using System.Text.RegularExpressions;
+using System;
 
-namespace aoc202432;
+namespace aoc202442;
 
 partial class Solution
 {
-    [GeneratedRegex(@"do\(\)|don't\(\)|mul\(\d+,\d+\)")]
-    private partial Regex AllTerms();
+    const string MAS = "MAS";
+    const string SAM = "SAM";
 
-    [GeneratedRegex(@"mul\(|\)")]
-    private partial Regex Mul();
+    private ((int, int), (int, int), (int, int), (int, int), (int, int)) GetCrossIndexes(int x, int y) =>
+         ((x - 1, y - 1), (x + 1, y - 1), (x, y), (x - 1, y + 1), (x + 1, y + 1));
 
-    private static bool MulEnabled = true;
-
-    internal long GetSumOfAllMuls(string inputStr)
+    private bool IsMASorSAM(char[][] grid, (int x, int y) pos1, (int x, int y) pos2, (int x, int y) pos3)
     {
-        long result = 0;
+        char c1 = grid[pos1.y][pos1.x];
+        char c2 = grid[pos2.y][pos2.x];
+        char c3 = grid[pos3.y][pos3.x];
 
-        var matches = AllTerms().Matches(inputStr);
-        foreach(Match match in matches)
+        string s = $"{c1}{c2}{c3}";
+
+        return s.Equals(MAS)  || s.Equals(SAM);
+    }
+
+    internal int CountCrossMAS(char[][] grid)
+    {
+        int count = 0;
+
+        for(int y = 1; y < grid.Length - 1; y++)
         {
-            var value = match.Value;
-            if(value.Contains("don't()"))
+            for(int x = 1; x < grid[y].Length - 1; x++)
             {
-                MulEnabled = false;
-            }
-            else if(value.Contains("do()"))
-            {
-                MulEnabled = true;
-            }
-            else if(MulEnabled)
-            {
-                var numbersString = Mul().Replace(match.Value, "");
-                var numbersInts = numbersString.Split(",").Select(int.Parse);
-                var (first, second) = (numbersInts.First(), numbersInts.Last());
-                result = result + first * second;
+                var (leftUp, rightUp, center, leftDown, rightDown) = GetCrossIndexes(x, y);
+                bool firstDiagonal = IsMASorSAM(grid, leftUp, center, rightDown);
+                bool secondDiagonal = IsMASorSAM(grid, rightUp, center, leftDown);
+
+                if(firstDiagonal && secondDiagonal) count++;
             }
         }
 
-        return result;
+        return count;
     }
-
 }

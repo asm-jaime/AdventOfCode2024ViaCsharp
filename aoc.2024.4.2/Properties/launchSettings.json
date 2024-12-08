@@ -2,7 +2,7 @@
   "profiles": {
     "template": {
       "commandName": "Project",
-      "commandLineArgs": "< ../../../in2.txt"
+      "commandLineArgs": "< ../../../in3.txt"
     }
   }
 }
