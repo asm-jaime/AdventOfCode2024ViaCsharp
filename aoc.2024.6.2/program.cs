@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace aoc202461;
+namespace aoc202462;
 
 class Program
 {
@@ -20,7 +20,7 @@ class Program
             line = Console.ReadLine();
         }
 
-        var result = solution.GeDistinctPositonsBeforeLeaving(map.ToArray());
+        var result = solution.CountLoopObstructionPositions(map.ToArray());
 
         Console.WriteLine(result);
     }
